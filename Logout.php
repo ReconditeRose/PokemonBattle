@@ -1,5 +1,5 @@
 <?php
-session_unset();
+session_start();
+$_SESSION['userName'] = '';
 header("location:index.php");
-
 ?>

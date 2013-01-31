@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <body background = "/images/pw_bg.png">
+<head>
+<link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
+</head>
+
 <?php
 session_start();
 echo '<li><a href="/User.php">Home</a></li>';

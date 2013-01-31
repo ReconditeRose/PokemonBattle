@@ -17,12 +17,10 @@ height:50px;
 
 <?php
 session_start();
-$host="whale.csse.rose-hulman.edu"; // Host name 
-$username="olsonmc"; // Mysql username 
-$password="33upCosh"; // Mysql password 
-$db_name="pokemonBattle"; // Database name 
-
-// Connect to server and select databse.
+$host="whale.csse.rose-hulman.edu";
+$username="333PokemonBattle";
+$password="333PokemonBattle";
+$db_name="pokemonBattle"; 
 $conn = mssql_connect("$host", "$username", "$password")or die("cannot connect"); 
 mssql_select_db("$db_name",$conn)or die("cannot select DB");
 
@@ -53,7 +51,7 @@ echo '<form action = "DeleteParty.php" method = "post"><input type = "submit" va
 
 	echo '<H1>Team #' . $id . '</H1>';
 		
-	$result = 'Select pokemonName, Attack,Defense,[Sp Attack],[Sp Defense],Speed,HP,Move1,Move2,Move3,Move4,PokemonID from UserPokemon where PartyNO=' . $id ;
+	$result = 'exec getPokemon ' . $id ;
 	$poke = mssql_query($result,$conn) or die(‘error’);
 		echo '<table>';
 	while($indPoke = mssql_fetch_array($poke)){

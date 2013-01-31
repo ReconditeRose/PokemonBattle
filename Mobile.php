@@ -18,7 +18,7 @@ if($type == 'PokemonTeam'){
 	$TeamID = $_GET['TeamID'];
 	$query = "MobileUser $username,$password,$TeamID";
 	$response = true;
-}
+	}
 if($type == 'Login'){
 	$username = $_GET['Username'];
 	$password = $_GET['Password'];
