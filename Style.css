@@ -1,4 +1,4 @@
-table,td,th
+table,td,th,tp
 {
 border:1px solid black;
 }
@@ -8,5 +8,44 @@ width:100%;
 }
 th
 {
-height:50px;
+height:25px;
 }
+td
+{
+}
+
+P.special {
+color : green;
+border: solid red;
+}
+
+.HealthBar {
+
+	height:25px;
+	color: #DDD;
+	background-color: #a8ff00;
+}
+
+.barGraph {
+	border-bottom: 3px solid #333;
+	font: 9px Helvetica, Geneva, sans-serif;
+	height: 200px;
+	margin: 1em 0;
+	padding: 0;
+	position: relative;
+	}
+	
+.barGraph li {
+	border: 1px solid #555;
+	border-bottom: none;
+	bottom: 0; 
+	color: #FFF;
+	margin: 0; 
+	padding: 0 0 0 0;
+	position: absolute;
+	list-style: none;
+	text-align: center;
+	width: 39px;
+	}
+	
+.barGraph li.p1{ background-color:#666666 }

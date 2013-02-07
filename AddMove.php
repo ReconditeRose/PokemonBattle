@@ -32,13 +32,12 @@ if($_POST['Type'] == "Add"){
 $pokemonID = $_GET['PokeID'];
 $learnMove = $_POST['Move'];
 mssql_query("exec LearnMove '$pokemonID','$learnMove'");
-echo "exec LearnMove '$pokemonID','$learnMove'";
+
 
 }else if($_POST['Type'] == 'Drop'){
 $var1 = $_POST['var1'];
 $var2 = $_GET['PokeID'];
 mssql_query("exec dropMove $var2,$var1");
-echo "exec dropMove $var2,$var1";
 }
 
 }
@@ -57,24 +56,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD']=='POST') {
 
 	
 	while($x<5){
-		echo '<form method="post" action="">
-		'. $row[$x] . '
-		<input type="submit" value = "Delete">
-		<input type="hidden" name="var1" value ="'.$x.'">
-		<input type="hidden" name ="Type" value="Drop">'."
-		</form>";
+		if($row[$x] != ""){
+			echo '<form method="post" action="">
+			'. $row[$x] . '
+			<input type="submit" value = "Delete">
+			<input type="hidden" name="var1" value ="'.$x.'">
+			<input type="hidden" name ="Type" value="Drop">'."
+			</form>";
+		}
 		$x= $x+1;
 	}
-		
-	echo "Pokemon: $row[0] <li>$row[1] <li>$row[2] <li>$row[3] <li> $row[4]";
 
-	$pokemon = mssql_query('exec getMoves');
+	$pokemon = mssql_query('exec getMoves ' . $add);
 	echo '<table><tr>
 	<th>Move Name</th>
-	<th>Type</th>
 	<th>Add</th>
-	<th>Speed</th>
+	<th>Type</th>
+	<th>Power</th>
 	<th>Accuracy</th>
+	<th>PP</th>
 	</tr>';
 	while ($poke = mssql_fetch_array($pokemon)){
 		echo "<tr>
@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD']=='POST') {
 		<td>$poke[1]</td>
 		<td>$poke[2]</td>
 		<td>$poke[3]</td>
+		<td>$poke[4]</td>
 		</tr>";
 	}
 	

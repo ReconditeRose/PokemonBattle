@@ -102,9 +102,11 @@ delete from UserPokemon
 where PokemonID = @pokemonID
 go
 
-Alter Procedure getMoves
+Alter Procedure getMoves (@var1 int)
 As
-select [Name],[Type],[Power],[Accuracy],PP from [Move]
+select [Name],[Type],[Power],[Accuracy],PP from [Move],Learn
+Where Learn.MoveName = Move.Name and Learn.PokemonName =
+(Select pokemonName from UserPokemon where PokemonID = @var1)
 go
 
 Create Procedure getPokemon(@var1 int)
@@ -119,6 +121,18 @@ if(@var2>0 and @var2<5)
 exec('update UserPokemon set Move'+@var2+' = NULL where PokemonID='+@var1);
 go
 
-exec AuthProd
-exec dropMove 40,1
+Create Procedure SelectParties(@var1 varchar(50))
+AS
+Select PartyID FROM UserParty where userName = @var1
+go
 
+Create Procedure SelectPokemon(@var1 varchar(50))
+AS
+SELECT PokemonName,PokemonID from UserPokemon where PartyNo = @var1
+go
+
+Alter Procedure getPokeAddData
+AS
+Select Name,[Type 1],[Type 2],[Base Hp],[Base Attack],[Base Defense],[Base Sp. Attack],[Base Sp. Defense],[Base Speed] from Pokemon
+
+exec AuthProd

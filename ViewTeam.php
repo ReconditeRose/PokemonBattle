@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<style>
-table,td,th
-{
-border:1px solid black;
-}
-table
-{
-width:100%;
-}
-th
-{
-height:50px;
-}
-</style>
-</head>
+<link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
 
 <?php
 session_start();
