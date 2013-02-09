@@ -32,13 +32,19 @@ mssql_select_db("$db_name",$conn)or die("cannot select DB");
 <?php
 $person = $_SESSION['userName'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
 $result = mssql_query("Exec CreateParty @userName='$person'",$conn);
 }
 
-$posts = mssql_query("Exec SelectParties '$person'",$conn);
+$posts = mssql_query("Exec BattleParties '$person'",$conn);
 while ($row = mssql_fetch_array($posts)) {
-	$nameID = htmlspecialchars($row[0], ENT_QUOTES);
-    echo '<strong>Team ID:' . $nameID . '</strong>';	
+	$PartyID = htmlspecialchars($row[0], ENT_QUOTES);
+	$nameID = htmlspecialchars($row[1], ENT_QUOTES);
+    echo '<strong>User Team#:' . $PartyID . ' vs User:' . $nameID . '</strong>';	
+	$active = mssql_query("Exec getActivePokemon $PartyID",$conn);
+	$active = mssql_fetch_array($active);
+
 	
 	$pokemon = mssql_query("Exec SelectPokemon '$row[0]'",$conn);
 	$x = 1;
@@ -47,38 +53,63 @@ while ($row = mssql_fetch_array($posts)) {
 	<td>Pending</td>
 	<td>Switch</td>
 	</tr>';
+	
+	$hp1 = ($active[2]+90)*2;
+	$hp2 = ($active[5]+90)*2;
+	$battle = $row[2];
+	
 	while ($x<=6){
 		if($poke = mssql_fetch_array($pokemon))
-			echo'';
-		else
+			echo'works';
+		else{
 			$poke[0]="";
+			$poke[1]="";
+			}
 		echo '<tr>';
 		switch($x){
 		case 1:
-			echo '<td>Opposing Pokemon</td><td rowspan="2"></td>';
+			echo '<td>'."$active[3] HP:$active[4]/$hp2". '</td><td rowspan="2"></td>';
 			break;
 		case 2:
-			echo '<td><div style="width :50%" class="HealthBar"></div></td>'; 
+			$ratio = intval(100*$active[4]/$hp2);
+			echo '<td><div style="width :'. $ratio.'%" class="HealthBar"></div></td>'; 
+			echo $ratio;
 			break;
 		case 3: 
-			echo '<td rowspan="2"></td><td>Your Pokemon</td>';
+			echo '<td rowspan="2"></td><td>'."$active[0] HP:$active[1]/$hp1". '</td>';
 			break;
 		case 4:
-			echo '<td><div style="width :50%" class="HealthBar"></div></td>'; 
+			$ratio = intval(100*$active[1]/$hp1);
+			echo '<td><div style="width :'.$ratio .'%" class="HealthBar"></div></td>'; 
+			echo $ratio;
+			break;
+		case 5:
+			echo '<form method="post" action="MakeMove.php"><input type="hidden" name ="type" value="Attack">
+				<input type="hidden" name ="BID" value ='. $battle.'>
+				<input type="hidden" name="poke1" value='. $active[10] .'>
+				<input type="hidden" name="poke2" value='. $active[11] .'>
+			';
+			echo '<td><input type="submit" style="width:100px" name ="move" value ="'. $active[6] .'"></td>';
+			echo '<td><input type="submit" style="width:100px" name ="move" value ="'. $active[7] .'"></td>';
+			echo '</form>';
 			break;
 		case 6:
-		case 5:
-			echo '<td><form type="post"><input type="submit" style="width:100px" value ="Attack"></form></td>';
-			echo '<td><form type="post"><input type="submit" style="width:100px" value ="Attack"></form></td>';
+			echo '<form method="post" action="MakeMove.php"><input type="hidden" name ="type" value="Attack">';
+			echo '<td><input type="submit" style="width:100px" name ="move" value ="'. $active[8] .'"></td>';
+			echo '<td><input type="submit" style="width:100px" name ="move" value ="'. $active[9] .'"></td>';
+			echo '</form>';
 			break;
 		default:
 			break;
 		}
-		echo '
-		
-
-		<td><form type="post"><input type="submit" style="width:100px" value ='.$poke[0].'></form></td>
-		</tr>';
+			echo '<td><form method="post" action="MakeMove.php"><input type="hidden" name ="type" value="Switch">
+				<input type="hidden" name ="BID" value ='. $battle.'>
+				<input type="hidden" name="poke1" value='. $active[10] .'>
+				<input type="hidden" name="poke2" value='. $active[11] .'>
+				<input type="hidden" name="Switch" value='.$poke[1].'>
+				<input type="submit" style="width:100px" value ='.$poke[0].'>
+				</form></td></tr>
+			';
 		$x = $x+1;
 	}
 	echo '</table>';
