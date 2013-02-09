@@ -21,7 +21,6 @@ mssql_query("Exec QueueCommand $var1,$var2,1,$Move,$BID,$Switch");
 $Switch = $_POST['Switch'];
 echo $Switch . 'Hello'; 
 mssql_query("Exec QueueCommand $var1,$var2,2,NULL,$BID,$Switch");
-header('Location:User.php');
 }
-
+//header('Location:User.php');
 ?>
