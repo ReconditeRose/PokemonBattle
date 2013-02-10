@@ -19,8 +19,8 @@ $Move = $_POST['move'];
 mssql_query("Exec QueueCommand $var1,$var2,1,$Move,$BID,$Switch");
 }else if($ID =="Switch"){
 $Switch = $_POST['Switch'];
-echo $Switch . 'Hello'; 
+echo "Exec QueueCommand $var1,$var2,2,NULL,$BID,$Switch";
 mssql_query("Exec QueueCommand $var1,$var2,2,NULL,$BID,$Switch");
 }
-//header('Location:User.php');
+header('Location:User.php');
 ?>
