@@ -30,15 +30,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Make sure the name field is filled
     $email =  $_POST['email'];
     if (empty($email)) $errors .= '<li>Email is required</li>';
-
+	if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9+-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $email)) {
+		$errors .= '<li>Email address is <u>not</u> valid.</li>';
+	}
     // Make sure the username field is filled
     $username = $_POST['username'];
     if (empty($username)) $errors .= '<li>Username is required</li>';
+	
+	if (!preg_match("/^[a-zA-Z0-9]{6,}/", $username)) {
+		$errors .= '<li>Username is <u>not</u> at least 6 alphanumeric characters.</li>';
+	}
 
     // Make sure the password field is filled
     $password = $_POST['password'];
     if (empty($password)) $errors .= '<li>Password is required</li>';
-
+	if (!preg_match("/^[a-zA-Z0-9]{6,}^/", $password)) {
+		$errors .= '<li>Password is <u>not</u> at least 6 alphanumeric characters. May not contain special characters</li>';
+	}
     // Make sure the passwords match
     $confirm = $_POST['confirmpassword'];
     if (strcmp($password, $confirm) != 0) $errors .= '<li>Passwords do not match</li>';
@@ -50,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Otherwise, begin the user creation process
     } else {
             // First, check for that username already being taken
-    $user_results = mssql_query( "SELECT Username FROM [User] WHERE Username = '" . $username . "'",$conn);
+    $user_results = mssql_query( "exec getUser '$username'",$conn);
     // We don't care what the result is
     // If there is one, that means the username is taken
     if ($user_results) {
