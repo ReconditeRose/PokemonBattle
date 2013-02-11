@@ -34,7 +34,7 @@ mssql_select_db("$db_name",$conn)or die("cannot select DB");
 <td width="294"><input name="myusername" type="text" id="myusername"></td>
 <p>
 <td>Password:</td>
-<td><input name="mypassword" type="text" id="mypassword"></td>
+<td><input name="mypassword" type="password" id="mypassword"></td>
 <p>
 <td><input type="submit" name="Submit" value="Login"></td>
 </tr>
