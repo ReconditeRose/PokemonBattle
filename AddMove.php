@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+   <body background = "/images/pw_bg.jpg">
 <link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
 </head>
 
@@ -16,9 +17,6 @@ mssql_select_db("$db_name",$conn)or die("cannot select DB");
 
 echo '<li><a href="/User.php">Home</a></li>'
 ?>
-
-
-<body background = "/images/pw_bg.png">
 
 <html>
 <head>
@@ -39,7 +37,7 @@ mssql_query("exec LearnMove '$pokemonID','$learnMove'");
 $var1 = $_POST['var1'];
 $var2 = $_GET['PokeID'];
 mssql_query("exec dropMove $var2,$var1");
-}
+
 
 }
 

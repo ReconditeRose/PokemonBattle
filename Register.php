@@ -10,11 +10,12 @@ $conn = mssql_connect("$host", "$username", "$password")or die("cannot connect")
 mssql_select_db("$db_name",$conn)or die("cannot select DB");
 
 ?>
-<body background = "/images/pw_bg.png">
+<body background = "/images/pw_bg.jpg">
 <!DOCTYPE html>
 
 <html>
 <head>
+<a href = "index.php">Home</a>
 <title>Register</title>
 </head>
 <body>

@@ -17,12 +17,12 @@ mssql_select_db("$db_name",$conn)or die("cannot select DB");
 
 
 <html>
-<body background = "/images/pw_bg.png">
+<body background = "/images/pw_bg.jpg">
 <head>
 <title>Welcome!</title>
 </head>
 <body>
-<li><a href="/Register.php">Register</a></li>
+<a href="/Register.php">Register</a>
 <h1>Welcome to Pokemon Battle!</h1>
 <href = 
 <h2> Login </h2>

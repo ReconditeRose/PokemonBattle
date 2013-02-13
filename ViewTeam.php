@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
+   <body background = "/images/pw_bg.jpg">
+
 
 <?php
 session_start();
@@ -13,7 +15,6 @@ mssql_select_db("$db_name",$conn)or die("cannot select DB");
 echo '<li><a href="/User.php">Home</a></li>'
 ?>
 
-<body background = "/images/pw_bg.png">
 
 <html>
 <head>

@@ -1,6 +1,8 @@
 table,td,th,tp
 {
 border:1px solid black;
+background-color: #D4C3A9;
+opacity:0.9;
 }
 table
 {
@@ -13,15 +15,6 @@ height:25px;
 td
 {
 }
-
-div.background
-  {
-  width:500px;
-  height:250px;
-  background:url(images/pw_bg.png) repeat;
-  border:2px solid black;
-    opacity:0.6;
-  }
 
 P.special {
 color : green;

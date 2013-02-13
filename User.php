@@ -1,17 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
-<HTML>
-  <HEAD>
-    <LINK href="style.css" rel="stylesheet" type="text/css">
-	<div class="background">
-	</div>
-  </HEAD>
-  <BODY>
-    <P class="special">This paragraph should have special green text.
-  </BODY>
-</HTML>
-
-
+   <body background = "/images/pw_bg.jpg">
+<LINK href="style.css" rel="stylesheet" type="text/css">
 <?php
 session_start();
 echo "Hey ".$_SESSION['userName'];
