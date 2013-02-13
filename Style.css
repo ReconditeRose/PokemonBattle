@@ -14,6 +14,15 @@ td
 {
 }
 
+div.background
+  {
+  width:500px;
+  height:250px;
+  background:url(images/pw_bg.png) repeat;
+  border:2px solid black;
+    opacity:0.6;
+  }
+
 P.special {
 color : green;
 border: solid red;

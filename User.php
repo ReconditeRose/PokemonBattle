@@ -3,6 +3,8 @@
 <HTML>
   <HEAD>
     <LINK href="style.css" rel="stylesheet" type="text/css">
+	<div class="background">
+	</div>
   </HEAD>
   <BODY>
     <P class="special">This paragraph should have special green text.
@@ -106,8 +108,6 @@ echo'
 
 
 <H2>Active Teams</H2>
-<body background = "/images/pw_bg.png">
-
 <?php
 
 $posts = mssql_query("Exec BattleParties '$person'",$conn);
